@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-for TAG in python alpine focal focal-norec jammy jammy-norec distroless; do
+for TAG in python alpine focal focal-fat jammy jammy-fat distroless; do
     docker build -f "Dockerfile.${TAG}" -t "app:${TAG}" .
+    #docker build --pull --no-cache -f "Dockerfile.${TAG}" -t "app:${TAG}" .
     docker-slim build --tag "app:${TAG}-slim" "app:${TAG}"
 
     echo "${TAG} "
@@ -14,6 +15,6 @@ for TAG in python alpine focal focal-norec jammy jammy-norec distroless; do
     trivy image "app:${TAG}" > "trivy-${TAG}.txt"
     grep "^Total:" "trivy-${TAG}.txt"
     grype --file "grype-${TAG}.txt" "app:${TAG}"
-    docker scan -f "Dockerfile.${TAG}" "app:${TAG}" > "snyk-${TAG}.txt"
+    #docker scan -f "Dockerfile.${TAG}" "app:${TAG}" > "snyk-${TAG}.txt"
     echo
 done

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-for TAG in python alpine focal focal-norec jammy jammy-norec distroless; do
+for TAG in python alpine focal focal-fat jammy jammy-fat distroless; do
     docker rmi -f "app:${TAG}"
     docker rmi -f "app:${TAG}-slim"
     rm "grype-${TAG}.txt" 2>/dev/null
