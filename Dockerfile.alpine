@@ -1,9 +1,12 @@
-FROM python:3.9-alpine3.15
+FROM python:3.9.13-alpine3.15
+
+RUN apk --no-cache upgrade
 
 WORKDIR /app
 COPY app/requirements.txt ./
 RUN pip3 install --no-cache-dir -r requirements.txt
 COPY app/app.py ./
 
+USER nobody
 EXPOSE 8008
 ENTRYPOINT ["python3","app.py"]

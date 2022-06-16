@@ -1,10 +1,13 @@
-FROM python:3.9-slim-bullseye
+FROM python:3.9.13-slim-bullseye
+
+RUN apt-get -y update && apt-get -y upgrade && \
+    apt-get -y clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-COPY --chown=www-data:www-data app/requirements.txt ./
+COPY --chown=nobody:nobody app/requirements.txt ./
 RUN pip3 install --no-cache-dir -r requirements.txt
-COPY --chown=www-data:www-data app/app.py ./
+COPY --chown=nobody:nobody app/app.py ./
 
-USER www-data
+USER nobody
 EXPOSE 8008
 ENTRYPOINT ["python3","app.py"]

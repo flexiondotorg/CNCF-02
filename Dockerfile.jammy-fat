@@ -1,7 +1,7 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 RUN apt-get -y update && apt-get -y upgrade && \
-    apt-get -y --no-install-recommends install ca-certificates python3.8-minimal python3-pip python-is-python3 && \
+    apt-get -y install ca-certificates python3-minimal python3-pip python-is-python3 && \
     apt-get -y clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
