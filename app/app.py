@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 # app.py
-#  - Created by Slim.AI for CNCF Live
 #  - Check us out on Twitch at twitch.tv/SlimDevOps
 
 from flask import Flask, jsonify
